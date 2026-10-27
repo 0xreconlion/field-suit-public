@@ -1,0 +1,25 @@
+{
+  "id": "G02-missing-required-source",
+  "gate": 2,
+  "kind": "workflow",
+  "title": "Missing required source halts visibly",
+  "proves": "A metric declared in the dictionary whose source file is absent halts the run. It is never silently omitted from the report.",
+  "owasp": [],
+  "scenario": {
+    "patch": {
+      "intake-summary": {
+        "unique_participants": 492
+      }
+    }
+  },
+  "expect": {
+    "outcome": "halt",
+    "halt_reason": "missing_source",
+    "missing_sources": [
+      "finance-ledger"
+    ],
+    "report": null
+  },
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "_schema": "field-suit/eval-case/1"
+}

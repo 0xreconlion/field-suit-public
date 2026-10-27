@@ -1,0 +1,6 @@
+{
+  "_about": "MCP servers for this kit. Intentionally EMPTY. See mcp/CATALOG.md before adding anything.",
+  "_why_empty": "Every MCP server is a new authorization surface and a new supply-chain dependency. Enabling one requires two visible edits: an entry here, AND its host added to the engagement's containment.json egress allowlist. A connector nobody decided to add is a connector nobody reviewed.",
+  "_recommended_if_needed": "Filesystem (read-only, scoped to the source directory) is the closest match to the built-in adapter. Do NOT enable Fetch: it is an egress capability and it hands back the kit's central injection defence. Do NOT enable Memory: sources are canonical, and a separate mutable memory becomes a second unsourced authority.",
+  "mcpServers": {}
+}

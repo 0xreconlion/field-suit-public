@@ -1,0 +1,30 @@
+{
+  "_about": "Containment posture for the Riverbend synthetic engagement. This is the half of the defence that still holds after the model has been successfully persuaded.",
+
+  "egress": {
+    "policy": "default-deny",
+    "allowlist": [
+      "api.anthropic.com"
+    ],
+    "_note": "Exactly one host. The drafting model is reachable; nothing else is. An injected instruction to POST anywhere else fails at the network, not at the prompt. Adding a host here is an operator decision with a written reason."
+  },
+
+  "credentials": {
+    "source": "secret-store",
+    "ttl_seconds": 900,
+    "_note": "Task-scoped and short-lived, so a leaked credential is already dead. Never supplied via environment variables: this process executes model-directed logic, and the environment is readable by anything it runs."
+  },
+
+  "execution": {
+    "user": "field-suit",
+    "allow_root": false,
+    "writable_paths": ["runs/", "improvement/traces/"],
+    "_note": "Everything else is read-only to the running process. The adapter additionally has no write method, so a filesystem permission error is the second line, not the first."
+  },
+
+  "operator_only": [
+    "egress.allowlist",
+    "credentials.ttl_seconds",
+    "execution.allow_root"
+  ]
+}

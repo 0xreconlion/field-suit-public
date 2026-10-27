@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "field-suit/source-register/1",
+  "title": "Source register",
+  "description": "Every source the workflow may read. The gateway decides against this; an unregistered source is denied.",
+  "type": "object",
+  "required": ["sources"],
+  "properties": {
+    "review_window_days": {
+      "type": "integer", "minimum": 1, "default": 180,
+      "description": "How long an owner confirmation stays valid before it becomes a finding."
+    },
+    "sources": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["source_id", "owner_role", "owner_holder", "owner_confirmed",
+                     "data_class", "export_method", "export_proven"],
+        "additionalProperties": true,
+        "properties": {
+          "source_id": {"type": "string", "minLength": 1,
+            "description": "Stable. Never reuse an id for a different source."},
+          "owner_role": {"type": "string", "minLength": 1,
+            "description": "The job, not the person."},
+          "owner_holder": {"type": "string", "minLength": 1,
+            "description": "The person doing that job today. 'UNCONFIRMED' is valid and is reported as a finding — it is never silently blank."},
+          "owner_confirmed": {"type": "string", "format": "date",
+            "description": "When THEY confirmed it, not when you wrote it down."},
+          "data_class": {"enum": ["public", "internal", "confidential", "restricted"],
+            "description": "What is IN the file, not where it is stored. Unknown values fail closed at the gateway."},
+          "period": {"type": "string"},
+          "published": {"type": "string", "format": "date"},
+          "export_method": {"type": "string", "minLength": 1},
+          "export_proven": {"type": "boolean",
+            "description": "True only if a real export was actually pulled. Assuming this is how engagements die late."},
+          "manual_step_required": {"type": "boolean",
+            "description": "If a person must do something every cycle, that is a dependency with a name attached, not an integration."}
+        }
+      }
+    }
+  }
+}

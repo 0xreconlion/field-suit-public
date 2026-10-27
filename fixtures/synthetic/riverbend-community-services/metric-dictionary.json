@@ -1,0 +1,63 @@
+{
+  "_about": "Metric dictionary for Riverbend Community Services (SYNTHETIC). One definition per number, one source of truth per number. This file is the accuracy lever, not paperwork: an agent that cannot resolve a figure to an entry here must halt rather than infer.",
+  "period": "2026-08",
+  "freshness_window_days": 45,
+  "owner_confirmation_window_days": 180,
+  "metrics": [
+    {
+      "id": "unique_participants",
+      "label": "Total unique participants served",
+      "definition": "Distinct individuals who attended at least one session of any program during the reporting period, de-duplicated across programs.",
+      "unit": "people",
+      "source_of_truth": "intake-summary",
+      "corroborating_sources": [
+        "program-attendance"
+      ],
+      "reconciliation_rule": "halt_on_conflict",
+      "_note": "Two sources publish this number and they disagree in the fixture (486 vs 492). reconciliation_rule is deliberately halt_on_conflict, not prefer_source_of_truth: a 6-person gap with a known unresolved cause is a finding for a human, not a number to quietly pick.",
+      "extraction_labels": [
+        "Total unique participants",
+        "Total unique participants served"
+      ]
+    },
+    {
+      "id": "volunteer_hours",
+      "label": "Total volunteer hours",
+      "definition": "Hours logged by volunteers across all programs during the reporting period.",
+      "unit": "hours",
+      "source_of_truth": "volunteer-hours",
+      "corroborating_sources": [],
+      "reconciliation_rule": "single_source",
+      "_note": "The only source for this metric is stale in the fixture (May data for an August report). Exercises gate 4.",
+      "extraction_labels": [
+        "Total volunteer hours"
+      ]
+    },
+    {
+      "id": "partner_referrals",
+      "label": "Partner referrals received",
+      "definition": "Referrals placed by partner agencies during the reporting period.",
+      "unit": "referrals",
+      "source_of_truth": "partner-update",
+      "corroborating_sources": [],
+      "reconciliation_rule": "single_source",
+      "extraction_labels": [
+        "Total partner referrals"
+      ]
+    },
+    {
+      "id": "cost_per_participant",
+      "label": "Cost per participant served",
+      "definition": "Total program expenditure divided by unique participants served.",
+      "unit": "USD",
+      "source_of_truth": "finance-ledger",
+      "corroborating_sources": [],
+      "reconciliation_rule": "single_source",
+      "_note": "Declared here but NO source file exists in the fixture. Exercises gate 2: a required source that is absent must halt visibly, not be silently omitted from the report.",
+      "extraction_labels": [
+        "cost per participant"
+      ]
+    }
+  ],
+  "_extraction_note": "Every metric declares extraction_labels: the exact bold-total labels that identify it in a source, matched case-insensitively on normalised whitespace and nothing else. There is deliberately NO fuzzy or keyword matching. An extractor that infers which number in a document is the metric is the single most likely place for a wrong figure to enter a board report, and 'Total participants' binding to 'Total unique participants served' is exactly how that happens. Two sources may spell the same metric differently (they do here), so the list is per-metric, not per-source, and adding a spelling is a visible diff."
+}

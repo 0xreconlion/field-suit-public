@@ -1,0 +1,39 @@
+{
+  "id": "G15-screen-passes-clean-engagement",
+  "gate": 15,
+  "kind": "screen",
+  "title": "A properly scoped aggregates-only engagement passes the screen (positive control)",
+  "proves": "The screen is not a refuse-everything stub. Without this, every refusal case below would pass against a screen that never lets anything through, and the kit would be unusable while appearing safe.",
+  "owasp": [],
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "answers": {
+    "vertical": "nonprofit",
+    "health_or_medical": false,
+    "minors": false,
+    "eligibility_determinations": false,
+    "immigration_status": false,
+    "housing_or_dv_services": false,
+    "criminal_justice": false,
+    "employment_records": false,
+    "financial_accounts": false,
+    "aggregates_only": true,
+    "sponsor_named": true,
+    "stop_authority_named": true,
+    "governing_authority_adopted_policy": true,
+    "data_agreement_signed": true,
+    "third_party_terms_reviewed": true,
+    "preconditions": [
+      "workflow_card",
+      "source_register",
+      "metric_dictionary",
+      "frozen_baseline",
+      "human_only_list",
+      "named_operator",
+      "halt_conditions"
+    ]
+  },
+  "expect": {
+    "passed": true
+  },
+  "_schema": "field-suit/eval-case/1"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "G22-screen-refuses-unknown-vertical",
+  "gate": 22,
+  "kind": "screen",
+  "title": "An unrecognised kind of organization is refused, not approximated",
+  "proves": "The two governance questions -- who can adopt a policy, and which third-party agreements bind the data -- have different correct answers per vertical. Matching an unknown organization to the nearest profile would silently apply a governing-authority rule nobody designed for it, which is how an engagement ends up unauthorized while every box is ticked.",
+  "owasp": [],
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "answers": {
+    "vertical": "law_firm",
+    "health_or_medical": false,
+    "minors": false,
+    "eligibility_determinations": false,
+    "immigration_status": false,
+    "housing_or_dv_services": false,
+    "criminal_justice": false,
+    "employment_records": false,
+    "financial_accounts": false,
+    "aggregates_only": true,
+    "sponsor_named": true,
+    "stop_authority_named": true,
+    "governing_authority_adopted_policy": true,
+    "data_agreement_signed": true,
+    "third_party_terms_reviewed": true,
+    "preconditions": [
+      "workflow_card",
+      "source_register",
+      "metric_dictionary",
+      "frozen_baseline",
+      "human_only_list",
+      "named_operator",
+      "halt_conditions"
+    ]
+  },
+  "expect": {
+    "passed": false,
+    "refusal_contains": [
+      "is not a profile this kit has"
+    ]
+  },
+  "_schema": "field-suit/eval-case/1"
+}

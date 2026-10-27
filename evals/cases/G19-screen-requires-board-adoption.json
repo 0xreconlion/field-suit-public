@@ -1,0 +1,42 @@
+{
+  "id": "G19-screen-requires-board-adoption",
+  "gate": 19,
+  "kind": "screen",
+  "title": "An executive signature alone does not clear the policy gate",
+  "proves": "At most nonprofits the executive director cannot authorize data handling alone and an AI use policy needs board adoption to stick. Accepting an ED signature here would produce an engagement that is not actually authorized.",
+  "owasp": [],
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "answers": {
+    "vertical": "nonprofit",
+    "health_or_medical": false,
+    "minors": false,
+    "eligibility_determinations": false,
+    "immigration_status": false,
+    "housing_or_dv_services": false,
+    "criminal_justice": false,
+    "employment_records": false,
+    "financial_accounts": false,
+    "aggregates_only": true,
+    "sponsor_named": true,
+    "stop_authority_named": true,
+    "governing_authority_adopted_policy": false,
+    "data_agreement_signed": true,
+    "third_party_terms_reviewed": true,
+    "preconditions": [
+      "workflow_card",
+      "source_register",
+      "metric_dictionary",
+      "frozen_baseline",
+      "human_only_list",
+      "named_operator",
+      "halt_conditions"
+    ]
+  },
+  "expect": {
+    "passed": false,
+    "refusal_contains": [
+      "board"
+    ]
+  },
+  "_schema": "field-suit/eval-case/1"
+}

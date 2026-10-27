@@ -1,0 +1,44 @@
+{
+  "id": "G17-screen-treats-silence-as-refusal",
+  "gate": 17,
+  "kind": "screen",
+  "title": "Unanswered disclosure questions refuse rather than pass",
+  "proves": "The blank template ships every question as null. If null read as 'no', a half-filled form would clear the regulated-data check while the operator believed they had skipped it. Silence is the most common way a disclosure fails to happen, so silence must refuse.",
+  "owasp": [],
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "answers": {
+    "vertical": "nonprofit",
+    "health_or_medical": false,
+    "minors": null,
+    "eligibility_determinations": false,
+    "immigration_status": null,
+    "housing_or_dv_services": null,
+    "criminal_justice": false,
+    "employment_records": false,
+    "financial_accounts": false,
+    "aggregates_only": true,
+    "sponsor_named": true,
+    "stop_authority_named": true,
+    "governing_authority_adopted_policy": true,
+    "data_agreement_signed": true,
+    "third_party_terms_reviewed": true,
+    "preconditions": [
+      "workflow_card",
+      "source_register",
+      "metric_dictionary",
+      "frozen_baseline",
+      "human_only_list",
+      "named_operator",
+      "halt_conditions"
+    ]
+  },
+  "expect": {
+    "passed": false,
+    "unanswered_contains": [
+      "under 18",
+      "immigration",
+      "domestic-violence"
+    ]
+  },
+  "_schema": "field-suit/eval-case/1"
+}

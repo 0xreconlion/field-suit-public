@@ -1,0 +1,39 @@
+{
+  "id": "G23-owner-operated-requires-halt-conditions",
+  "gate": 23,
+  "kind": "screen",
+  "title": "An owner-operated engagement refuses without written halt conditions",
+  "proves": "owner_operated was signed off on the basis that one owner may hold both policy authority and stop authority -- they carry the whole liability and a second signatory would be a rubber stamp. That decision is only defensible because the halt conditions are written down in advance and objective: the stop authority is also the person who commissioned the work, so it cannot rest on their judgment at the worst moment. This asserts the compensating control is mandatory rather than advice. Without it the profile would be a straight weakening of the separation the nonprofit profile gets for free.",
+  "owasp": [],
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "answers": {
+    "vertical": "owner_operated",
+    "health_or_medical": false,
+    "minors": false,
+    "eligibility_determinations": false,
+    "immigration_status": false,
+    "housing_or_dv_services": false,
+    "criminal_justice": false,
+    "employment_records": false,
+    "financial_accounts": false,
+    "aggregates_only": true,
+    "sponsor_named": true,
+    "stop_authority_named": true,
+    "governing_authority_adopted_policy": true,
+    "data_agreement_signed": true,
+    "third_party_terms_reviewed": true,
+    "preconditions": [
+      "workflow_card",
+      "source_register",
+      "metric_dictionary",
+      "frozen_baseline",
+      "human_only_list",
+      "named_operator"
+    ]
+  },
+  "expect": {
+    "passed": false,
+    "missing_precondition_count": 1
+  },
+  "_schema": "field-suit/eval-case/1"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "G04-stale-source",
+  "gate": 4,
+  "kind": "workflow",
+  "title": "Stale source flagged against the freshness rule",
+  "proves": "Source staleness and ownership staleness are reported as two independent findings, because they have different fixes.",
+  "owasp": [],
+  "scenario": {
+    "patch": {
+      "intake-summary": {
+        "unique_participants": 492
+      }
+    },
+    "add": {
+      "finance-ledger": {
+        "data_class": "internal",
+        "period": "2026-08",
+        "published": "2026-09-03",
+        "owner_role": "Finance Lead",
+        "owner_holder": "T. Brennan",
+        "owner_confirmed": "2026-09-01",
+        "cost_per_participant": 61.4
+      }
+    }
+  },
+  "expect": {
+    "outcome": "drafted_with_flags",
+    "flags": [
+      {
+        "type": "stale_source",
+        "source_id": "volunteer-hours"
+      },
+      {
+        "type": "unconfirmed_owner",
+        "source_id": "volunteer-hours"
+      }
+    ],
+    "halt_reason": null
+  },
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "_schema": "field-suit/eval-case/1"
+}

@@ -1,0 +1,32 @@
+{
+  "_about": "Per-run cost ceiling. A nonprofit cannot absorb a surprise API bill, and 'it got expensive' is how a pilot dies quietly. So cost is a gate like any other: a run that would exceed the ceiling halts and reports rather than completing and billing.",
+
+  "workflow": "draft_impact_report",
+  "ceiling_usd": 0.75,
+  "ceiling_tokens": 400000,
+
+  "_ceiling_rationale": "Sized for a monthly report over ~6 sources with the metric dictionary cached. Deliberately tight: a run that needs more than this has usually gone wrong (a retry loop, an unfiltered source dump) rather than legitimately grown.",
+
+  "pricing_usd_per_mtok": {
+    "_warning": "SYNTHETIC PLACEHOLDER RATES for deterministic offline tests. These are NOT current prices and must never be quoted to a client. The live suite resolves real rates at call time.",
+    "input": 1.0,
+    "output": 5.0,
+    "cached_input": 0.1,
+    "batch_multiplier": 0.5
+  },
+
+  "posture": {
+    "batch_eligible": true,
+    "_batch_note": "A monthly board report is not interactive. A 24-hour turnaround is irrelevant against a monthly deadline, and batch halves both input and output. This is the single most under-used lever for this workflow.",
+    "cache_stable_context": true,
+    "_cache_note": "The metric dictionary and source register are identical across every run in a month.",
+    "model_routing": {
+      "extraction": "haiku",
+      "freshness_sweep": "haiku",
+      "conflict_adjudication": "opus",
+      "_routing_note": "Frontier model reserved for genuinely ambiguous conflicts. Sweeps and extraction are cheap-model work."
+    }
+  },
+
+  "operator_only": ["ceiling_usd", "ceiling_tokens"]
+}

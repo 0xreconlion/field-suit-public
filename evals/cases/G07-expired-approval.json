@@ -1,0 +1,43 @@
+{
+  "id": "G07-expired-approval",
+  "gate": 7,
+  "kind": "gateway",
+  "title": "Expired approval is refused",
+  "proves": "Approval freshness is enforced, not merely recorded.",
+  "owasp": [
+    "ASI03"
+  ],
+  "request": {
+    "actor": "report-drafter",
+    "purpose": "draft_impact_report",
+    "workflow": "draft_impact_report",
+    "tool": "draft_impact_report",
+    "operation": "draft",
+    "resource": "reports/2026-08-impact.md",
+    "data_class": "internal",
+    "tier": 3,
+    "destination": "board-packet",
+    "approval_ref": "apv-expired",
+    "action": {
+      "section": "summary",
+      "body_sha": "abc123"
+    }
+  },
+  "approvals": {
+    "apv-expired": {
+      "bind_to_request": true,
+      "approver": "E. Vance",
+      "issued_at": "2026-09-01T10:00:00Z",
+      "expires_at": "2026-09-01T11:00:00Z",
+      "used": false
+    }
+  },
+  "now": "2026-09-29T12:00:00Z",
+  "expect": {
+    "allowed": false,
+    "reason": "approval.expired",
+    "check": "6:approval"
+  },
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "_schema": "field-suit/eval-case/1"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "G08-approval-replay-different-content",
+  "gate": 8,
+  "kind": "gateway",
+  "title": "Approval replayed against different content is refused",
+  "proves": "Hash binding holds. Approving one diff and executing another produces a different binding hash and is refused. This is the gateway's whole reason to exist.",
+  "owasp": [
+    "ASI03",
+    "ASI09"
+  ],
+  "request": {
+    "actor": "report-drafter",
+    "purpose": "draft_impact_report",
+    "workflow": "draft_impact_report",
+    "tool": "draft_impact_report",
+    "operation": "draft",
+    "resource": "reports/2026-08-impact.md",
+    "data_class": "internal",
+    "tier": 3,
+    "destination": "board-packet",
+    "approval_ref": "apv-other",
+    "action": {
+      "section": "summary",
+      "body_sha": "DIFFERENT"
+    }
+  },
+  "approvals": {
+    "apv-other": {
+      "bind_to_action": {
+        "section": "summary",
+        "body_sha": "abc123"
+      },
+      "approver": "E. Vance",
+      "issued_at": "2026-09-29T11:00:00Z",
+      "expires_at": "2026-09-29T13:00:00Z",
+      "used": false
+    }
+  },
+  "now": "2026-09-29T12:00:00Z",
+  "expect": {
+    "allowed": false,
+    "reason": "approval.binding_mismatch",
+    "check": "6:approval"
+  },
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "_schema": "field-suit/eval-case/1"
+}

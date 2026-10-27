@@ -1,0 +1,40 @@
+{
+  "id": "G00b-tier3-valid-approval-allowed",
+  "gate": 0,
+  "kind": "gateway",
+  "title": "Tier-3 action with a correctly bound approval is ALLOWED (positive control)",
+  "proves": "Approvals can succeed, not only fail. Gates 7 and 8 prove bad approvals are refused; without this, an approval check that rejected every approval would pass both.",
+  "owasp": [],
+  "request": {
+    "actor": "report-drafter",
+    "purpose": "draft_impact_report",
+    "workflow": "draft_impact_report",
+    "tool": "markdown_source",
+    "operation": "draft",
+    "resource": "reports/2026-08-impact.md",
+    "data_class": "internal",
+    "tier": 3,
+    "destination": "board-packet",
+    "approval_ref": "apv-good",
+    "action": {
+      "section": "summary",
+      "body_sha": "abc123"
+    }
+  },
+  "approvals": {
+    "apv-good": {
+      "bind_to_request": true,
+      "approver": "E. Vance",
+      "issued_at": "2026-09-29T11:00:00Z",
+      "expires_at": "2026-09-29T13:00:00Z",
+      "used": false
+    }
+  },
+  "now": "2026-09-29T12:00:00Z",
+  "expect": {
+    "allowed": true,
+    "reason": "allowed"
+  },
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "_schema": "field-suit/eval-case/1"
+}

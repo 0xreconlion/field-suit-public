@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <rect width="1280" height="640" fill="#0b0f14"/>
+  <path d="M0 96H1280M0 192H1280M0 288H1280M0 384H1280M0 480H1280M0 576H1280M96 0V640M192 0V640M288 0V640M384 0V640M480 0V640M576 0V640M672 0V640M768 0V640M864 0V640M960 0V640M1056 0V640M1152 0V640" stroke="#18212b"/>
+  <rect x="64" y="60" width="1152" height="520" rx="28" fill="#101720" stroke="#293747" stroke-width="2"/>
+  <text x="112" y="132" fill="#f59e0b" font-family="ui-monospace, monospace" font-size="24" font-weight="700">0xreconlion / REFERENCE IMPLEMENTATION</text>
+  <text x="108" y="246" fill="#f7f8fa" font-family="Inter, Arial, sans-serif" font-size="92" font-weight="800">Field Suit</text>
+  <text x="112" y="310" fill="#aebdca" font-family="Inter, Arial, sans-serif" font-size="31">Content-bound approval and default-deny network containment.</text>
+  <g transform="translate(112 366)" font-family="ui-monospace, monospace">
+    <rect width="274" height="116" rx="18" fill="#151f2a" stroke="#516477"/><text x="30" y="47" fill="#f59e0b" font-size="19">CONTENT HASH</text><text x="30" y="81" fill="#f7f8fa" font-size="20">SHA256: 7E3A…</text>
+    <path d="M296 58H364" stroke="#f59e0b" stroke-width="4"/><path d="M354 47L366 58L354 69" fill="none" stroke="#f59e0b" stroke-width="4"/>
+    <rect x="388" width="274" height="116" rx="18" fill="#f59e0b"/><text x="435" y="48" fill="#0b0f14" font-size="19" font-weight="700">APPROVAL MATCH</text><text x="458" y="82" fill="#0b0f14" font-size="20" font-weight="700">ALLOW ONCE</text>
+    <path d="M684 58H752" stroke="#f59e0b" stroke-width="4"/><path d="M742 47L754 58L742 69" fill="none" stroke="#f59e0b" stroke-width="4"/>
+    <rect x="776" width="268" height="116" rx="18" fill="#151f2a" stroke="#516477"/><text x="814" y="47" fill="#f59e0b" font-size="19">EGRESS GATE</text><text x="814" y="81" fill="#f7f8fa" font-size="20">ALLOWLIST ONLY</text>
+  </g>
+  <text x="112" y="548" fill="#708396" font-family="ui-monospace, monospace" font-size="20">33 OFFLINE SYNTHETIC GATES · NO CREDENTIALS · NOT A CLIENT PLATFORM</text>
+</svg>

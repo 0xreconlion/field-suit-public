@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "field-suit/metric-dictionary/1",
+  "title": "Metric dictionary",
+  "description": "Every reported number, defined exactly once. This is the accuracy lever, not paperwork.",
+  "type": "object",
+  "required": ["period", "metrics"],
+  "properties": {
+    "period": {"type": "string"},
+    "freshness_window_days": {"type": "integer", "minimum": 1, "default": 45},
+    "owner_confirmation_window_days": {"type": "integer", "minimum": 1, "default": 180},
+    "metrics": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "definition", "unit", "source_of_truth",
+                     "extraction_labels", "reconciliation_rule"],
+        "additionalProperties": true,
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+          "label": {"type": "string", "minLength": 1},
+          "definition": {"type": "string", "minLength": 20,
+            "description": "Precise enough that two staff who disagree can read it and find out who is right. 'Participants served' does not qualify."},
+          "unit": {"type": "string", "minLength": 1,
+            "description": "Always. '500' is not an answer."},
+          "source_of_truth": {"type": "string", "minLength": 1,
+            "description": "Exactly one source_id from the register."},
+          "corroborating_sources": {"type": "array", "items": {"type": "string"}, "default": []},
+          "extraction_labels": {
+            "type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1},
+            "description": "EXACT label strings that identify this metric in a source. No fuzzy matching, no stemming. 'Total participants' quietly binding to 'Total unique participants served' is how a real, cited, wrong number reaches a board. Two sources usually spell it differently, so adding a spelling is a visible diff someone reviews."
+          },
+          "reconciliation_rule": {
+            "enum": ["halt_on_conflict", "single_source"],
+            "description": "Prefer halt_on_conflict. A discrepancy with an unresolved cause is a finding about the organization's operations, and quietly preferring one source hides the problem the engagement was hired to surface. Note there is deliberately no 'average' or 'prefer_newest' option."
+          }
+        }
+      }
+    }
+  }
+}

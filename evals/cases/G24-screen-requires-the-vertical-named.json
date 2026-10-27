@@ -1,0 +1,41 @@
+{
+  "id": "G24-screen-requires-the-vertical-named",
+  "gate": 24,
+  "kind": "screen",
+  "title": "An unnamed kind of organization refuses rather than defaulting",
+  "proves": "Silence is a refusal everywhere else in this screen, and the vertical is no exception. Defaulting to the only signed profile would quietly apply nonprofit board-adoption rules to an LLC, where they are nonsense, and the operator would never be told a question went unanswered.",
+  "owasp": [],
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "answers": {
+    "health_or_medical": false,
+    "minors": false,
+    "eligibility_determinations": false,
+    "immigration_status": false,
+    "housing_or_dv_services": false,
+    "criminal_justice": false,
+    "employment_records": false,
+    "financial_accounts": false,
+    "aggregates_only": true,
+    "sponsor_named": true,
+    "stop_authority_named": true,
+    "governing_authority_adopted_policy": true,
+    "data_agreement_signed": true,
+    "third_party_terms_reviewed": true,
+    "preconditions": [
+      "workflow_card",
+      "source_register",
+      "metric_dictionary",
+      "frozen_baseline",
+      "human_only_list",
+      "named_operator",
+      "halt_conditions"
+    ]
+  },
+  "expect": {
+    "passed": false,
+    "unanswered_contains": [
+      "kind of organization"
+    ]
+  },
+  "_schema": "field-suit/eval-case/1"
+}

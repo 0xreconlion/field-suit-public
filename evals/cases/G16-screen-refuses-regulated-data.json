@@ -1,0 +1,43 @@
+{
+  "id": "G16-screen-refuses-regulated-data",
+  "gate": 16,
+  "kind": "screen",
+  "title": "Beneficiary-level regulated data is refused even when every other box is ticked",
+  "proves": "For a nonprofit this is the routine case, not the edge case. A signed agreement, a named sponsor and an adopted policy do not make health records or records about minors in-scope for a first engagement.",
+  "owasp": [],
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "answers": {
+    "vertical": "nonprofit",
+    "health_or_medical": true,
+    "minors": true,
+    "eligibility_determinations": false,
+    "immigration_status": false,
+    "housing_or_dv_services": false,
+    "criminal_justice": false,
+    "employment_records": false,
+    "financial_accounts": false,
+    "aggregates_only": true,
+    "sponsor_named": true,
+    "stop_authority_named": true,
+    "governing_authority_adopted_policy": true,
+    "data_agreement_signed": true,
+    "third_party_terms_reviewed": true,
+    "preconditions": [
+      "workflow_card",
+      "source_register",
+      "metric_dictionary",
+      "frozen_baseline",
+      "human_only_list",
+      "named_operator",
+      "halt_conditions"
+    ]
+  },
+  "expect": {
+    "passed": false,
+    "refusal_contains": [
+      "health",
+      "under 18"
+    ]
+  },
+  "_schema": "field-suit/eval-case/1"
+}

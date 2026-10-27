@@ -1,0 +1,20 @@
+{
+  "id": "G13b-within-budget-allowed",
+  "gate": 13,
+  "kind": "containment",
+  "title": "A run inside its ceiling proceeds (positive control)",
+  "proves": "The cost gate is not a deny-everything stub, and the batch plus cache posture actually lands under the ceiling rather than being decorative.",
+  "owasp": [],
+  "usage": {
+    "input_tokens": 40000,
+    "output_tokens": 6000,
+    "cached_input_tokens": 120000,
+    "batch": true
+  },
+  "expect": {
+    "allowed": true,
+    "reason": "allowed"
+  },
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "_schema": "field-suit/eval-case/1"
+}

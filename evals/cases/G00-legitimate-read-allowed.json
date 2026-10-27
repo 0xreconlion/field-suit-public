@@ -1,0 +1,27 @@
+{
+  "id": "G00-legitimate-read-allowed",
+  "gate": 0,
+  "kind": "gateway",
+  "title": "A legitimate request is ALLOWED (positive control)",
+  "proves": "The suite is not satisfied by a gateway that denies everything. Without this case, all twelve denial gates would pass against a stub that returns deny unconditionally, and the suite would be worthless while appearing green.",
+  "owasp": [],
+  "request": {
+    "actor": "report-drafter",
+    "purpose": "draft_impact_report",
+    "workflow": "draft_impact_report",
+    "tool": "markdown_source",
+    "operation": "read",
+    "resource": "sources/program-attendance-2026-08.md",
+    "data_class": "internal",
+    "tier": 2,
+    "destination": "local",
+    "approval_ref": null,
+    "action": {}
+  },
+  "expect": {
+    "allowed": true,
+    "reason": "allowed"
+  },
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "_schema": "field-suit/eval-case/1"
+}

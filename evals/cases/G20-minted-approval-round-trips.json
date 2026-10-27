@@ -1,0 +1,40 @@
+{
+  "id": "G20-minted-approval-round-trips",
+  "gate": 20,
+  "kind": "gateway",
+  "title": "An approval minted by the issuing path is accepted by the verifying path",
+  "proves": "The two halves agree. Gates 7 and 8 prove bad approvals are refused and G00b proves a hand-built good one is accepted, but nothing proved the code that MINTS an approval produces one the gateway will take. A mint/verify pair that disagrees fails closed - safe, and completely unusable, with no test telling you why.",
+  "owasp": [
+    "ASI03"
+  ],
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "request": {
+    "actor": "report-drafter",
+    "purpose": "draft_impact_report",
+    "workflow": "draft_impact_report",
+    "tool": "draft_impact_report",
+    "operation": "draft",
+    "resource": "reports/2026-08-impact.md",
+    "data_class": "internal",
+    "tier": 3,
+    "destination": "board-packet",
+    "action": {
+      "section": "summary",
+      "body_sha": "abc123"
+    },
+    "approval_ref": "apv-minted"
+  },
+  "approvals": {
+    "apv-minted": {
+      "mint": true,
+      "approver": "E. Vance",
+      "ttl_minutes": 30
+    }
+  },
+  "now": "2026-09-29T12:00:00Z",
+  "expect": {
+    "allowed": true,
+    "reason": "allowed"
+  },
+  "_schema": "field-suit/eval-case/1"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "field-suit-toolbox",
+  "description": "Tools for a governed AI adoption engagement: operator posture controls, workflow definition skills, and report-only review agents.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Field Suit"
+  },
+  "keywords": ["governance", "human-in-the-loop", "verification", "nonprofit", "reporting"],
+
+  "_layout": {
+    "skills/posture": "What the operator declares for a session. Loads into the main context because it constrains that session.",
+    "skills/workflow": "How to build the artifacts the kit depends on - source register, metric dictionary.",
+    "agents": "Report-only reviewers. Separate context and restricted tools, because isolation is the value: a reviewer who has already read the argument for doing something is a poor judge of whether it should be done.",
+    "commands": "Thin entry points to the scripts. They report; they do not decide.",
+    ".mcp.json": "Intentionally empty. See mcp/CATALOG.md."
+  },
+
+  "_packaging_note": "Skills load name and description only until invoked, so being aware of the whole shelf costs less context than using one tool from it. That is what lets the shelf grow without making every session more expensive.",
+
+  "_report_only_invariant": "No agent here declares Write, Edit, or NotebookEdit. scripts/check-debrand.sh enforces this by reading the frontmatter, because the frontmatter is what the runtime obeys and the prose is only what a reader believes."
+}

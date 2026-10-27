@@ -1,0 +1,39 @@
+{
+  "id": "G26-owner-operated-passes-with-one-signatory",
+  "gate": 26,
+  "kind": "screen",
+  "title": "An owner-operated engagement passes with one person in both roles (positive control)",
+  "proves": "The signed decision is that a single owner as both policy authority and stop authority is acceptable. Gates 22-24 are all refusals, and a refusal-only set would pass a screen that rejects everything -- this asserts the profile actually works when the conditions are met, so the decision is proven rather than merely allowed.",
+  "owasp": [],
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "answers": {
+    "vertical": "owner_operated",
+    "health_or_medical": false,
+    "minors": false,
+    "eligibility_determinations": false,
+    "immigration_status": false,
+    "housing_or_dv_services": false,
+    "criminal_justice": false,
+    "employment_records": false,
+    "financial_accounts": false,
+    "aggregates_only": true,
+    "sponsor_named": true,
+    "stop_authority_named": true,
+    "governing_authority_adopted_policy": true,
+    "data_agreement_signed": true,
+    "third_party_terms_reviewed": true,
+    "preconditions": [
+      "workflow_card",
+      "source_register",
+      "metric_dictionary",
+      "frozen_baseline",
+      "human_only_list",
+      "named_operator",
+      "halt_conditions"
+    ]
+  },
+  "expect": {
+    "passed": true
+  },
+  "_schema": "field-suit/eval-case/1"
+}

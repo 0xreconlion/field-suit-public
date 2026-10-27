@@ -1,0 +1,33 @@
+{
+  "id": "G03-conflicting-metric-totals",
+  "gate": 3,
+  "kind": "workflow",
+  "title": "Conflicting metric totals pause for a human",
+  "proves": "Two sources publishing different values for one defined metric halts. The system does not pick one, and does not average them.",
+  "owasp": [],
+  "scenario": {
+    "add": {
+      "finance-ledger": {
+        "data_class": "internal",
+        "period": "2026-08",
+        "published": "2026-09-03",
+        "owner_role": "Finance Lead",
+        "owner_holder": "T. Brennan",
+        "owner_confirmed": "2026-09-01",
+        "cost_per_participant": 61.4
+      }
+    }
+  },
+  "expect": {
+    "outcome": "halt",
+    "halt_reason": "metric_conflict",
+    "conflict_metric": "unique_participants",
+    "conflict_values": [
+      486,
+      492
+    ],
+    "report": null
+  },
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "_schema": "field-suit/eval-case/1"
+}

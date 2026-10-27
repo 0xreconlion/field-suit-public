@@ -1,0 +1,35 @@
+{
+  "id": "G18-screen-blocks-on-incomplete-discovery",
+  "gate": 18,
+  "kind": "screen",
+  "title": "Configuration refuses while discovery is unfinished, and names what is missing",
+  "proves": "The kit is used after process mapping, not instead of it. Configuring against guesses produces confident wrong answers rather than obvious failures, so a missing precondition halts and is named.",
+  "owasp": [],
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "answers": {
+    "vertical": "nonprofit",
+    "health_or_medical": false,
+    "minors": false,
+    "eligibility_determinations": false,
+    "immigration_status": false,
+    "housing_or_dv_services": false,
+    "criminal_justice": false,
+    "employment_records": false,
+    "financial_accounts": false,
+    "aggregates_only": true,
+    "sponsor_named": true,
+    "stop_authority_named": true,
+    "governing_authority_adopted_policy": true,
+    "data_agreement_signed": true,
+    "third_party_terms_reviewed": true,
+    "preconditions": [
+      "workflow_card",
+      "metric_dictionary"
+    ]
+  },
+  "expect": {
+    "passed": false,
+    "missing_precondition_count": 5
+  },
+  "_schema": "field-suit/eval-case/1"
+}

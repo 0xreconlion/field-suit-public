@@ -1,0 +1,58 @@
+{
+  "_about": "Authorization policy for the Riverbend synthetic engagement. Deny-by-default: anything not granted here is refused. Grants are narrow on purpose so revoking one does not disturb the others.",
+  "policy_version": "riverbend-2026-09-29.1",
+
+  "agents": {
+    "report-drafter": { "expires": "2027-03-31" },
+    "freshness-sweeper": { "expires": "2027-03-31" },
+    "decommissioned-agent": { "expires": "2026-01-31" }
+  },
+
+  "approval_required_at_tier": 3,
+
+  "destination_max_class": {
+    "local": "restricted",
+    "operator-review": "confidential",
+    "board-packet": "internal",
+    "public-website": "public"
+  },
+
+  "grants": [
+    {
+      "grant_id": "g-read-program-sources",
+      "actor": "report-drafter",
+      "purposes": ["draft_impact_report"],
+      "operations": ["read"],
+      "resources": ["sources/**", "injected/**", "metric-dictionary.json"],
+      "max_data_class": "internal",
+      "destinations": ["local", "operator-review"],
+      "max_tier": 2
+    },
+    {
+      "grant_id": "g-draft-report",
+      "actor": "report-drafter",
+      "purposes": ["draft_impact_report"],
+      "operations": ["draft"],
+      "resources": ["reports/**"],
+      "max_data_class": "internal",
+      "destinations": ["operator-review", "board-packet"],
+      "max_tier": 3
+    },
+    {
+      "grant_id": "g-sweep-freshness",
+      "actor": "freshness-sweeper",
+      "purposes": ["check_source_freshness"],
+      "operations": ["read"],
+      "resources": ["sources/**"],
+      "max_data_class": "internal",
+      "destinations": ["local"],
+      "max_tier": 1
+    }
+  ],
+
+  "_deliberately_absent": [
+    "No grant permits the 'write' operation to any resource. Gate 6 relies on this AND on the adapter having no write method — two independent reasons the same action fails.",
+    "No grant permits 'restricted' data. Beneficiary-level records are out of scope for a first engagement by construction, not by instruction.",
+    "No grant names 'public-website' as a destination for anything above 'public'."
+  ]
+}

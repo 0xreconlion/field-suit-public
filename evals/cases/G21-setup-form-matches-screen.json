@@ -1,0 +1,18 @@
+{
+  "id": "G21-setup-form-matches-screen",
+  "gate": 21,
+  "kind": "contract",
+  "scope": "operator",
+  "title": "The setup form asks exactly what the pre-access screen checks",
+  "proves": "The form and the screen are one unit. If a regulated category is added to the screen and not to the form, the form stops asking it \u2014 and the resulting answers file looks complete to the operator who filled it in while the screen refuses on a question they were never shown. The form deliberately does NOT evaluate the screen (one enforcer only), so this is what keeps the two honest.",
+  "owasp": [],
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "html": "tools/engagement-setup.html",
+  "lists": {
+    "REGULATED": "REGULATED_CATEGORIES",
+    "ASSURANCES": "REQUIRED_ASSURANCES",
+    "PRECONDITIONS": "PRECONDITIONS"
+  },
+  "expect": {},
+  "_schema": "field-suit/eval-case/1"
+}

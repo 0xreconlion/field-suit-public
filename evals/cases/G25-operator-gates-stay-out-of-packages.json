@@ -1,0 +1,12 @@
+{
+  "id": "G25-operator-gates-stay-out-of-packages",
+  "gate": 25,
+  "kind": "packaging",
+  "scope": "operator",
+  "title": "Operator-only gates are labelled and excluded from a client package",
+  "proves": "Gate 21 reads the operator's intake form, which is deliberately not vendored into a client package. The packager used to copy every case wholesale, so every package shipped with a gate it could never evaluate and ./verify.sh reported an ERR on day one — on the single artifact whose whole job is to let the client prove the thing still works. This asserts both halves stay in step: a case reading operator-only files carries scope=operator, and new-engagement.sh filters on exactly that field.",
+  "owasp": [],
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "expect": {},
+  "_schema": "field-suit/eval-case/1"
+}

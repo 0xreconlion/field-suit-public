@@ -1,0 +1,28 @@
+{
+  "id": "G09-unknown-data-class",
+  "gate": 9,
+  "kind": "gateway",
+  "title": "Unrecognised data class fails closed",
+  "proves": "An unknown classification denies. It is never coerced to the most permissive value, and never skipped because it could not be evaluated.",
+  "owasp": [],
+  "request": {
+    "actor": "report-drafter",
+    "purpose": "draft_impact_report",
+    "workflow": "draft_impact_report",
+    "tool": "markdown_source",
+    "operation": "read",
+    "resource": "sources/program-attendance-2026-08.md",
+    "data_class": "probably-fine",
+    "tier": 2,
+    "destination": "local",
+    "approval_ref": null,
+    "action": {}
+  },
+  "expect": {
+    "allowed": false,
+    "reason": "data_class.unknown",
+    "check": "4:data_class"
+  },
+  "fixture": "fixtures/synthetic/riverbend-community-services",
+  "_schema": "field-suit/eval-case/1"
+}

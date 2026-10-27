@@ -1,0 +1,394 @@
+<title>Engagement Setup</title>
+
+<style>
+  /* Same Command Deck token set as the Capability & Cost Map, the value model
+     and Field Discovery — all four are shown in the same meeting and should
+     read as one family. Do not fork these values here. */
+
+  :root {
+    --ground: #071018;
+    --surface: #0d1824;
+    --surface-2: #0a131d;
+    --line: #1e3550;
+    --line-strong: #2c5077;
+    --ink: #e4eefc;
+    --ink-2: #8aa3be;
+    --ink-3: #5f7793;
+    --accent: #2fd6e8;
+    --accent-soft: #0e2b33;
+    --good: #4fd18b;
+    --warn: #f0c75e;
+    --crit: #f37b7b;
+    --on-accent: #071018;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.9);
+    --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 16px 72px; }
+
+  header { padding: 28px 0 18px; border-bottom: 1px solid var(--line); }
+  h1 { font-family: var(--serif); font-size: 30px; margin: 0 0 6px; letter-spacing: -.01em; }
+  .sub { color: var(--ink-2); font-size: 14px; margin: 0; }
+
+  h2 { font-family: var(--serif); font-size: 21px; margin: 34px 0 4px; }
+  .lede { color: var(--ink-2); font-size: 13.5px; margin: 0 0 14px; }
+
+  /* ---- step rail ---- */
+  .steps { display: grid; gap: 8px; margin: 20px 0 8px; }
+  .step {
+    display: grid; grid-template-columns: 30px 1fr; gap: 12px;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 10px; padding: 11px 13px;
+  }
+  .step.here { border-color: var(--accent); background: var(--accent-soft); }
+  .step .n {
+    width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--surface-2); border: 1px solid var(--line-strong);
+    font: 600 13px var(--mono); color: var(--ink-2);
+  }
+  .step.here .n { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .step b { display: block; font-size: 14px; margin-bottom: 2px; }
+  .step span { color: var(--ink-2); font-size: 12.5px; }
+  .step code { font: 12px var(--mono); color: var(--accent); }
+
+  /* ---- form ---- */
+  fieldset { border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+             padding: 16px 16px 6px; margin: 0 0 16px; }
+  legend { font-family: var(--serif); font-size: 16px; padding: 0 8px; color: var(--ink); }
+  label.row { display: block; margin: 0 0 13px; }
+  label.row > span { display: block; font-size: 13.5px; margin-bottom: 5px; color: var(--ink); }
+  label.row small { display: block; color: var(--ink-3); font-size: 12px; margin-top: 3px; line-height: 1.45; }
+  input[type=text], input[type=number] {
+    width: 100%; background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 8px; padding: 9px 11px; color: var(--ink); font-size: 14px;
+  }
+  input:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: var(--accent); }
+
+  .q { border-top: 1px solid var(--line); padding: 12px 0 11px; }
+  .q:first-of-type { border-top: 0; }
+  .q p { margin: 0 0 8px; font-size: 13.5px; }
+  .q small { display: block; color: var(--ink-3); font-size: 12px; margin-top: 6px; line-height: 1.45; }
+  .yn { display: inline-flex; gap: 6px; }
+  .yn button {
+    background: var(--surface-2); border: 1px solid var(--line); color: var(--ink-2);
+    border-radius: 7px; padding: 5px 15px; font-size: 13px; cursor: pointer; font-weight: 600;
+  }
+  .yn button[aria-pressed=true][data-v=yes] { background: var(--crit); border-color: var(--crit); color: var(--on-accent); }
+  .yn button[aria-pressed=true][data-v=no]  { background: var(--good); border-color: var(--good); color: var(--on-accent); }
+  .yn.pos button[aria-pressed=true][data-v=yes] { background: var(--good); border-color: var(--good); color: var(--on-accent); }
+  .yn.pos button[aria-pressed=true][data-v=no]  { background: var(--crit); border-color: var(--crit); color: var(--on-accent); }
+
+  .scope-note { color: var(--warn); font-size: 12px; margin-top: 6px; }
+
+  .chk { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-top: 1px solid var(--line); }
+  .chk:first-child { border-top: 0; }
+  .chk input { margin-top: 3px; width: 16px; height: 16px; accent-color: var(--accent); flex: none; }
+  .chk b { font-size: 13.5px; font-weight: 600; }
+  .chk span { display: block; color: var(--ink-3); font-size: 12px; line-height: 1.45; }
+
+  /* ---- output ---- */
+  .bar {
+    position: sticky; bottom: 0; background: var(--surface-2);
+    border: 1px solid var(--line-strong); border-radius: 12px;
+    padding: 14px 16px; margin-top: 22px; box-shadow: var(--shadow);
+  }
+  .counts { display: flex; flex-wrap: wrap; gap: 18px; font-size: 13px; color: var(--ink-2); margin-bottom: 11px; }
+  .counts b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  button.go {
+    background: var(--accent); color: var(--on-accent); border: 0; border-radius: 8px;
+    padding: 10px 18px; font-size: 14px; font-weight: 700; cursor: pointer;
+  }
+  button.ghost {
+    background: transparent; color: var(--ink-2); border: 1px solid var(--line-strong);
+    border-radius: 8px; padding: 10px 16px; font-size: 14px; cursor: pointer; margin-left: 8px;
+  }
+  pre {
+    background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px;
+    padding: 13px; overflow-x: auto; font: 12.5px/1.6 var(--mono); color: var(--ink);
+    margin: 12px 0 0;
+  }
+  .warn-box {
+    border: 1px solid var(--warn); background: rgba(240,199,94,.07);
+    border-radius: 10px; padding: 13px 15px; margin: 18px 0; font-size: 13.5px;
+  }
+  .warn-box b { color: var(--warn); }
+  @media (max-width: 620px) { h1 { font-size: 25px; } .wrap { padding: 0 12px 64px; } }
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Engagement Setup</h1>
+  <p class="sub">Collects the answers. It does not decide — the screen does that, and it runs
+  when you build the package.</p>
+</header>
+
+<h2>Where you are</h2>
+<p class="lede">Steps 1&ndash;6 are the engagement. Step&nbsp;7 takes a minute. This tool is step&nbsp;3 and step&nbsp;7.</p>
+<div class="steps" id="steps"></div>
+
+<div class="warn-box">
+  <b>This page never decides anything.</b> It writes an answers file. Every refusal —
+  regulated data, an unanswered question, a missing precondition, a board that has not
+  adopted the policy — is decided by <code>configure.py</code> when you run it. If this
+  page and the screen ever disagree, the screen is right. Nothing you type here is sent
+  anywhere; it stays in this browser until you download it.
+</div>
+
+<h2>1 &middot; The organization</h2>
+<fieldset>
+  <legend>Basics</legend>
+  <label class="row"><span>Organization name</span>
+    <input type="text" id="organization" placeholder="Riverbend Community Services"></label>
+  <label class="row"><span>Reporting period</span>
+    <input type="text" id="period" placeholder="2026-08">
+    <small>The period the first report covers. Year and month.</small></label>
+</fieldset>
+
+<h2>2 &middot; What is in the data</h2>
+<p class="lede">Ask the <b>data owner</b>, not the sponsor. The sponsor usually does not know what
+is in the systems, and will answer honestly and wrongly.</p>
+<fieldset>
+  <legend>Disclosure &mdash; does the pilot data include&hellip;</legend>
+  <div id="regulated"></div>
+</fieldset>
+
+<h2>3 &middot; Authority and agreements</h2>
+<fieldset>
+  <legend>Assurances</legend>
+  <div id="assurances"></div>
+</fieldset>
+
+<h2>4 &middot; Is discovery finished?</h2>
+<p class="lede">Tick only what actually exists. A blank here is not a delay &mdash; it is the finding
+that discovery is not done, and saying so early is worth more than configuring against guesses.</p>
+<fieldset>
+  <legend>Preconditions</legend>
+  <div id="preconditions"></div>
+</fieldset>
+
+<h2>5 &middot; People and limits</h2>
+<fieldset>
+  <legend>Accountability</legend>
+  <label class="row"><span>Sponsor</span><input type="text" id="sponsor" placeholder="A. Reyes">
+    <small>Accountable for the engagement.</small></label>
+  <label class="row"><span>Stop authority</span><input type="text" id="stop_authority" placeholder="A. Reyes">
+    <small>Can halt this at any moment, for any reason. Often the same person; write them both.</small></label>
+  <label class="row"><span>Day-to-day operator</span><input type="text" id="operator" placeholder="J. Okafor">
+    <small>The one that matters in twelve months. A role with no current holder is a finding.</small></label>
+  <label class="row"><span>Cost ceiling per run (USD)</span><input type="number" id="ceiling_usd" value="0.75" step="0.05" min="0">
+    <small>A run projected over this halts and reports rather than completing and billing.</small></label>
+  <label class="row"><span>Egress allowlist</span><input type="text" id="egress" value="api.anthropic.com">
+    <small>Comma separated. Everything not listed is unreachable &mdash; which is what still holds
+    if the model is ever talked into trying.</small></label>
+</fieldset>
+
+<div class="bar">
+  <div class="counts">
+    <div>Disclosure answered <b><span id="c-reg">0</span>/8</b></div>
+    <div>Assurances answered <b><span id="c-asr">0</span>/6</b></div>
+    <div>Preconditions recorded <b><span id="c-pre">0</span>/7</b></div>
+    <div>People named <b><span id="c-ppl">0</span>/3</b></div>
+  </div>
+  <button class="go" id="download">Download answers.json</button>
+  <button class="ghost" id="show">Show the file</button>
+  <pre id="out" hidden></pre>
+  <pre id="cmd">python3 scripts/configure.py --answers answers.json --dry-run
+./scripts/new-engagement.sh --answers answers.json --out ../engagement-&lt;client&gt;</pre>
+</div>
+</div>
+
+<script>
+/* The three lists below mirror src/field_suit/configure/screen.py. They are
+   COPY ONLY — this page never evaluates them. It renders the questions and
+   records the answers; the Python screen decides. Duplicating the decision
+   logic here would create a second implementation of a safety gate, and the
+   one in the browser is the one that would quietly win. */
+
+const REGULATED = [
+  ["health_or_medical", "health, medical, disability, or behavioural-health information"],
+  ["minors", "records about anyone under 18"],
+  ["eligibility_determinations", "benefit, program, or financial-eligibility decisions about individuals"],
+  ["immigration_status", "citizenship, immigration, or visa status"],
+  ["housing_or_dv_services", "housing, shelter, or domestic-violence service records"],
+  ["criminal_justice", "arrest, conviction, probation, or reentry records"],
+  ["employment_records", "individual personnel, disciplinary, or compensation records"],
+  ["financial_accounts", "bank details, payment instruments, or donor payment records"],
+];
+
+const ASSURANCES = [
+  ["vertical", "The kind of organization is named below, and its profile is one this kit has signed off.", "Set by the Organization type selector. An unrecognised or unsigned type is refused, not approximated."],
+  ["aggregates_only", "The pilot will use only aggregate figures the organization <b>already reports somewhere</b>.", "A nonprofit: figures already published or reported to a funder. An owner-operated business: figures already given to a lender, insurer, franchisor or tax preparer."],
+  ["sponsor_named", "A named accountable sponsor exists."],
+  ["stop_authority_named", "A named person can stop the engagement at any time."],
+  ["governing_authority_adopted_policy", "The body with authority to adopt policy has <b>adopted</b> an AI use policy.", "For a nonprofit that is the governing board — an executive signature is not a substitute, and at most nonprofits is not actually authorized. For an owner-operated business it is the owner or managing member who can bind it."],
+  ["data_agreement_signed", "A confidentiality and data-handling agreement is signed."],
+];
+
+const PRECONDITIONS = [
+  ["workflow_card", "Workflow card", "One workflow, named and observed, with ten real instances. Ten, not three — three shows you the happy path."],
+  ["source_register", "Source register", "Every source named, with an owner role AND a current holder, a data class, and a proven export."],
+  ["metric_dictionary", "Metric dictionary", "Every number defined once, with one named source of truth and exact extraction labels."],
+  ["frozen_baseline", "Frozen baseline", "A signed before-picture that will never be recomputed."],
+  ["human_only_list", "Human-only decision list", "Written, and acknowledged by whoever holds policy authority — the board, or the owner."],
+  ["named_operator", "Named accountable human", "Recorded as a role plus the current holder."],
+  ["halt_conditions", "Halt conditions", "Written, objective conditions that stop the engagement — checkable facts, not “if it goes wrong”. Decide them while nobody is under pressure: at an owner-operated business the stop authority is also the person who commissioned the work."],
+];
+
+const STEPS = [
+  ["Before any access", "CDA + data-handling signed. Sponsor, stop authority, excluded areas, human-only list."],
+  ["Board adopts the policy", "Hand them the board one-pager. An ED signature is not a substitute."],
+  ["Screen", "This page, then <code>configure.py --dry-run</code>. Ask the data owner.", true],
+  ["Observe", "Interviews, process map, workflow card, ten real instances. No repo yet."],
+  ["Source register", "One real export from every system. Where engagements actually die."],
+  ["Freeze the baseline", "Signed. Never recomputed."],
+  ["Build the package", "<code>new-engagement.sh</code>. Standalone — they never need your repo.", true],
+  ["Shadow mode", "Staff work as before. It drafts in parallel. Nobody depends on it."],
+  ["Measure net time", "Including verification. Halving drafting and doubling review is nothing."],
+  ["Handoff", "Named operator, rehearsed rollback, AAR, every finding dispositioned."],
+];
+
+const answers = {};
+const $ = (id) => document.getElementById(id);
+
+function ynGroup(key, positive) {
+  const d = document.createElement("div");
+  d.className = "yn" + (positive ? " pos" : "");
+  for (const v of ["yes", "no"]) {
+    const b = document.createElement("button");
+    b.type = "button"; b.dataset.v = v; b.textContent = v === "yes" ? "Yes" : "No";
+    b.setAttribute("aria-pressed", "false");
+    b.onclick = () => {
+      answers[key] = (v === "yes");
+      [...d.children].forEach(c => c.setAttribute("aria-pressed", String(c === b)));
+      recount();
+    };
+    d.appendChild(b);
+  }
+  return d;
+}
+
+// steps
+STEPS.forEach(([t, s, here], i) => {
+  const el = document.createElement("div");
+  el.className = "step" + (here ? " here" : "");
+  el.innerHTML = `<div class="n">${i + 1}</div><div><b>${t}</b><span>${s}</span></div>`;
+  $("steps").appendChild(el);
+});
+
+// disclosure — "yes" is the out-of-scope answer, so yes renders red
+REGULATED.forEach(([key, desc]) => {
+  const q = document.createElement("div"); q.className = "q";
+  q.innerHTML = `<p>&hellip; ${desc}?</p>`;
+  q.appendChild(ynGroup(key, false));
+  const n = document.createElement("small");
+  n.className = "scope-note";
+  n.textContent = "Yes puts this out of scope for a first engagement — not a permanent no, but it is scoped separately with its own review.";
+  q.appendChild(n);
+  $("regulated").appendChild(q);
+});
+
+// The vertical is a profile name, not a yes/no. Only profiles this kit has
+// signed off are offered; the screen refuses anything else rather than
+// approximating, so there is deliberately no "other" option here.
+const VERTICALS = [
+  ["", "— select the kind of organization —"],
+  ["nonprofit", "Nonprofit or NGO with a governing board"],
+  ["owner_operated", "Owner-operated business (sole proprietor, LLC, partnership)"],
+];
+
+// assurances — "yes" is the good answer
+ASSURANCES.forEach(([key, text, note]) => {
+  const q = document.createElement("div"); q.className = "q";
+  q.innerHTML = `<p>${text}</p>`;
+  if (key === "vertical") {
+    const sel = document.createElement("select");
+    sel.id = "vertical";
+    for (const [v, label] of VERTICALS) {
+      const o = document.createElement("option");
+      o.value = v; o.textContent = label;
+      sel.appendChild(o);
+    }
+    sel.onchange = recount;
+    q.appendChild(sel);
+    if (note) {
+      const n = document.createElement("small");
+      n.className = "scope-note";
+      n.innerHTML = note;
+      q.appendChild(n);
+    }
+    $("assurances").appendChild(q);
+    return;
+  }
+  q.appendChild(ynGroup(key, true));
+  if (note) { const s = document.createElement("small"); s.innerHTML = note; q.appendChild(s); }
+  $("assurances").appendChild(q);
+});
+
+// preconditions
+PRECONDITIONS.forEach(([key, title, desc]) => {
+  const l = document.createElement("label"); l.className = "chk";
+  l.innerHTML = `<input type="checkbox" data-pre="${key}"><div><b>${title}</b><span>${desc}</span></div>`;
+  l.querySelector("input").onchange = recount;
+  $("preconditions").appendChild(l);
+});
+
+function collect() {
+  const pre = [...document.querySelectorAll("[data-pre]")].filter(c => c.checked).map(c => c.dataset.pre);
+  const out = {
+    organization: $("organization").value.trim(),
+    period: $("period").value.trim(),
+    sponsor: $("sponsor").value.trim(),
+    stop_authority: $("stop_authority").value.trim(),
+    operator: $("operator").value.trim(),
+    ceiling_usd: parseFloat($("ceiling_usd").value) || 0,
+    egress_allowlist: $("egress").value.split(",").map(s => s.trim()).filter(Boolean),
+    preconditions: pre,
+  };
+  // Unanswered questions are OMITTED, never written as false. The screen treats
+  // an absent or null answer as a refusal, and quietly supplying "no" here would
+  // walk a half-filled form straight past the regulated-data check.
+  for (const [k] of REGULATED) if (k in answers) out[k] = answers[k];
+  for (const [k] of ASSURANCES) if (k !== "vertical" && k in answers) out[k] = answers[k];
+  // The vertical comes from the selector, and an empty selection is OMITTED so
+  // the screen reports it unanswered rather than receiving an empty string.
+  const vsel = $("vertical");
+  if (vsel && vsel.value) out.vertical = vsel.value;
+  if ("third_party_terms_reviewed" in answers) out.third_party_terms_reviewed = answers.third_party_terms_reviewed;
+  return out;
+}
+
+function recount() {
+  const o = collect();
+  $("c-reg").textContent = REGULATED.filter(([k]) => k in o).length;
+  $("c-asr").textContent = ASSURANCES.filter(([k]) => k in o).length;
+  $("c-pre").textContent = o.preconditions.length;
+  $("c-ppl").textContent = [o.sponsor, o.stop_authority, o.operator].filter(Boolean).length;
+}
+
+["organization", "period", "sponsor", "stop_authority", "operator", "ceiling_usd", "egress"]
+  .forEach(id => $(id).addEventListener("input", recount));
+
+$("show").onclick = () => {
+  const p = $("out");
+  p.hidden = !p.hidden;
+  p.textContent = JSON.stringify(collect(), null, 2);
+};
+
+$("download").onclick = () => {
+  const blob = new Blob([JSON.stringify(collect(), null, 2) + "\n"], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "answers.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+recount();
+</script>
